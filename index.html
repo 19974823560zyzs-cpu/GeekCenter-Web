@@ -90,7 +90,7 @@
         .shizuku-highlight p { color: #e2e8f0; font-size: 1rem; margin: 0; }
         .shizuku-highlight strong { color: #fff; background: rgba(56, 189, 248, 0.3); padding: 2px 6px; border-radius: 4px; }
 
-        /* 🚀 4. 下载按钮区 (解决大小不一的问题) */
+        /* 🚀 4. 下载按钮区 (纵向排列，整齐划一) */
         .download-section {
             margin-top: 60px;
             padding-top: 30px;
@@ -108,8 +108,8 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            max-width: 320px; /* 强制统一最大宽度，手机端撑满 */
-            height: 56px; /* 强制统一高度 */
+            max-width: 320px;
+            height: 56px;
             border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
@@ -119,9 +119,23 @@
             box-sizing: border-box;
             position: relative;
             z-index: 101;
-            white-space: nowrap; /* 绝对不允许文字换行 */
+            white-space: nowrap;
         }
         
+        /* 蓝奏云按钮（青色发光） - 推荐主按钮 */
+        .btn-cloud {
+            background-color: #2dd4bf;
+            color: #0f172a;
+            box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7);
+            animation: pulse-cyan 2s infinite;
+        }
+        .btn-cloud:hover {
+            background-color: #5eead4;
+            transform: translateY(-3px);
+            animation: none;
+            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.6);
+        }
+
         /* 主按钮：官方直连（蓝色发光） */
         .btn-primary {
             background-color: #89b4fa;
@@ -147,20 +161,6 @@
             transform: translateY(-3px);
         }
 
-        /* 蓝奏云按钮（青色发光） */
-        .btn-cloud {
-            background-color: #2dd4bf;
-            color: #0f172a;
-            box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7);
-            animation: pulse-cyan 2s infinite;
-        }
-        .btn-cloud:hover {
-            background-color: #5eead4;
-            transform: translateY(-3px);
-            animation: none;
-            box-shadow: 0 10px 25px rgba(45, 212, 191, 0.6);
-        }
-
         /* iOS 待开发按钮（高级灰） */
         .btn-ios {
             background-color: #1e293b;
@@ -172,15 +172,15 @@
         }
         .btn-ios:hover { transform: none; }
 
-        @keyframes pulse-blue {
-            0% { box-shadow: 0 0 0 0 rgba(137,180,250, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(137,180,250, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(137,180,250, 0); }
-        }
         @keyframes pulse-cyan {
             0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(45, 212, 191, 0); }
             100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+        }
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(137,180,250, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(137,180,250, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(137,180,250, 0); }
         }
         @keyframes pulse-gray {
             0% { box-shadow: 0 0 0 0 rgba(148, 163, 184, 0.4); }
@@ -235,13 +235,13 @@
         </div>
     </div>
 
-    <!-- 🚀 下载区域：采用纵向排列，绝对等宽等高 -->
+    <!-- 🚀 下载区域 -->
     <div class="download-section reveal">
         <p style="color: #94a3b8; margin-bottom: 10px; font-size: 1rem;">选择下载节点：</p>
         
-        <!-- 按钮 1：蓝奏云 (推荐) -->
-        <a href="https://wwxv.lanzou.com/iz5l4e15ocb" target="_blank" class="btn btn-cloud">
-            ☁️ 蓝奏云极速下载 (提取码: b3ge)
+        <!-- 按钮 1：蓝奏云 (使用你提供的最新正确链接) -->
+        <a href="https://wwaxv.lanzouc.com/iiZ5I4el5ocb" target="_blank" class="btn btn-cloud">
+            ☁️ 蓝奏云极速下载 (密码: b3ge)
         </a>
 
         <!-- 按钮 2：GitHub 官方 -->
