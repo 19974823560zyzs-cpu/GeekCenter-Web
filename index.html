@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeekCenter - 极客中心</title>
     <style>
-        /* 全局基础样式 */
+        /* 🚀 1. 全局基础与发光背景 */
         body { 
             background-color: #0f172a; 
             color: #f8fafc; 
@@ -14,60 +14,74 @@
             padding: 50px 20px; 
             margin: 0; 
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        h1 { color: #89b4fa; font-size: 36px; text-shadow: 0 0 10px rgba(137,180,250,0.5); margin-bottom: 10px; }
-        p.subtitle { color: #94a3b8; font-size: 1.1rem; margin-bottom: 40px; }
 
-        /* 下载按钮样式 */
-        .btn { 
-            display: inline-block; 
-            background-color: #89b4fa; 
-            color: #0f172a; 
-            padding: 15px 40px; 
-            margin-top: 30px; 
-            border-radius: 10px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 1.2rem;
-            transition: 0.3s; 
-            box-shadow: 0 4px 15px rgba(137,180,250,0.4);
+        /* 鼠标跟随的暗紫光晕背景 */
+        #cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(137,180,250,0.15) 0%, rgba(15,23,42,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            transition: opacity 0.3s;
         }
-        .btn:hover { background-color: #b4c5fa; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(137,180,250,0.6); }
 
-        /* 功能介绍区容器 */
-        .geek-features { max-width: 1000px; margin: 0 auto; }
+        /* 🚀 2. 滚动浮现动画基础类 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 { color: #89b4fa; font-size: 40px; text-shadow: 0 0 20px rgba(137,180,250,0.6); margin-bottom: 10px; position: relative; z-index: 1;}
+        p.subtitle { color: #94a3b8; font-size: 1.1rem; margin-bottom: 40px; position: relative; z-index: 1;}
+
+        .geek-features { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1;}
         .section-title { color: #fff; font-size: 2rem; margin-bottom: 15px; font-weight: 800; }
         .section-desc { color: #94a3b8; font-size: 1.05rem; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
         .section-desc strong { color: #89b4fa; }
 
-        /* 卡片网格布局 */
+        /* 🚀 3. 3D 卡片网格 */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
             text-align: left;
+            perspective: 1000px; /* 开启 3D 空间 */
         }
         
-        /* 单个功能卡片 */
         .feature-card {
             background: #1e293b;
             border: 1px solid #334155;
             border-radius: 12px;
             padding: 25px;
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            transform-style: preserve-3d; /* 保持 3D 子元素 */
         }
+        
         .feature-card:hover {
-            transform: translateY(-5px);
             border-color: #89b4fa;
-            box-shadow: 0 10px 25px -5px rgba(137,180,250,0.2);
+            box-shadow: 0 15px 35px -5px rgba(137,180,250,0.25);
         }
+
+        /* 让内容稍微浮起来，增加 3D 层次感 */
+        .feature-card .icon, .feature-card h3, .feature-card p {
+            transform: translateZ(30px); 
+        }
+
         .feature-card .icon { font-size: 2rem; margin-bottom: 10px; }
         .feature-card h3 { color: #89b4fa; font-size: 1.2rem; margin-top: 0; margin-bottom: 10px; }
         .feature-card p { color: #cbd5e1; font-size: 0.95rem; margin: 0; }
 
-        /* 专属高亮横幅（Shizuku） */
         .shizuku-highlight {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
             border: 1px solid rgba(56, 189, 248, 0.4);
@@ -76,42 +90,105 @@
             text-align: center;
             box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.1);
             margin-top: 30px;
+            transition: transform 0.3s;
+        }
+        .shizuku-highlight:hover {
+            transform: scale(1.02);
         }
         .shizuku-highlight h3 { color: #38bdf8; font-size: 1.3rem; margin-top: 0; margin-bottom: 15px; }
         .shizuku-highlight p { color: #e2e8f0; font-size: 1rem; margin: 0; }
         .shizuku-highlight strong { color: #fff; background: rgba(56, 189, 248, 0.3); padding: 2px 6px; border-radius: 4px; }
+
+        /* 🚀 4. 带呼吸灯的下载按钮 */
+        .download-section {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 35px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background-color: #89b4fa;
+            color: #0f172a;
+            box-shadow: 0 0 0 0 rgba(137,180,250, 0.7);
+            animation: pulse 2s infinite; /* 脉冲呼吸灯动画 */
+        }
+        .btn-primary:hover {
+            background-color: #b4c5fa;
+            transform: translateY(-3px);
+            animation: none; /* 悬浮时停止呼吸，变得明亮 */
+            box-shadow: 0 10px 25px rgba(137,180,250,0.6);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #89b4fa;
+            border: 2px solid #89b4fa;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(137,180,250,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* 脉冲动画关键帧 */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(137,180,250, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(137,180,250, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(137,180,250, 0); }
+        }
     </style>
 </head>
 <body>
 
+    <!-- 鼠标跟随光晕 -->
+    <div id="cursor-glow"></div>
+
     <!-- 顶部标题区 -->
-    <h1>GeekCenter</h1>
-    <p class="subtitle">鏱粤出品，必属精品。<br>专为极客打造的现代化系统级工具箱。</p>
+    <div class="reveal">
+        <h1>GeekCenter</h1>
+        <p class="subtitle">张粤出品，必属精品。<br>专为极客打造的现代化系统级工具箱。</p>
+    </div>
 
     <!-- 功能简介区 -->
     <div class="geek-features">
-        <h2 class="section-title">什么是 GeekCenter？</h2>
-        <p class="section-desc">
-            我们融合了 <strong>Scene</strong> 的底层硬件监控与性能管理，以及 <strong>雹 (Hail)</strong> 强大的应用冻结与深度管控能力，为你提供最硬核、最丝滑的系统级操作体验。
-        </p>
+        <div class="reveal">
+            <h2 class="section-title">什么是 GeekCenter？</h2>
+            <p class="section-desc">
+                我们融合了 <strong>Scene</strong> 的底层硬件监控与性能管理，以及 <strong>雹 (Hail)</strong> 强大的应用冻结与深度管控能力，为你提供最硬核、最丝滑的系统级操作体验。
+            </p>
+        </div>
 
         <div class="feature-grid">
-            <div class="feature-card">
+            <div class="feature-card reveal tilt">
                 <div class="icon">📊</div>
                 <h3>全维硬件监控</h3>
                 <p>实时读取内存/存储、电池电压/电流/功率。独创智能温度矩阵，精准匹配读取 CPU、GPU、主板与电池温度。</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal tilt">
                 <div class="icon">🧊</div>
                 <h3>深度应用管控</h3>
                 <p>暴力扫盘无视系统拦截。支持一键冻结/解冻、强杀应用。支持 dex2oat 强制编译，榨干系统性能。</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal tilt">
                 <div class="icon">⚡</div>
                 <h3>极速进程调度</h3>
                 <p>实时查看 Top 20 CPU 占用列表。内置防误杀机制，自动拦截核心进程，保护系统安全不崩溃。</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal tilt">
                 <div class="icon">🛠️</div>
                 <h3>底层系统定制</h3>
                 <p>内置 DPI / 分辨率修改功能，附带防变砖倒计时恢复机制。集成云端账号系统，数据同步，全栈闭环。</p>
@@ -119,16 +196,80 @@
         </div>
 
         <!-- Shizuku 专属模块 -->
-        <div class="shizuku-highlight">
+        <div class="shizuku-highlight reveal">
             <h3>🔓 零门槛提权：内置 Shizuku 一键安装</h3>
             <p>告别繁琐的电脑 ADB 激活！GeekCenter 内置了 Shizuku 核心引擎，无需跳转，<strong>App 内即可一键提取、安装并引导激活</strong>，瞬间解锁全部极客底层能力。</p>
         </div>
     </div>
 
-    <br><br>
+    <!-- 下载区域 -->
+    <div class="download-section reveal">
+        <p style="color: #94a3b8; margin-bottom: 20px; font-size: 1rem;">选择下载节点：</p>
+        
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://ghproxy.net/https://github.com/19974823560zyzs-cpu/GeekCenter-Web/releases/latest/download/app-release.apk" class="btn btn-primary">
+                🚀 国内极速下载
+            </a>
+            
+            <a href="https://github.com/19974823560zyzs-cpu/GeekCenter-Web/releases/latest/download/app-release.apk" class="btn btn-secondary">
+                🐙 GitHub 官方下载
+            </a>
+        </div>
+        
+        <p style="color: #64748b; font-size: 0.85rem; margin-top: 30px;">
+            当前版本：v1.2026.11.04.12
+        </p>
+    </div>
 
-    <!-- 原本的下载按钮（链接我保留了你的最新版路径，请确认） -->
-    <a href="https://github.com/19974823560zyzs-cpu/GeekCenter/releases/latest/download/app-release.apk" class="btn">⬇️ 立即下载最新版 APK</a>
+    <!-- 🚀 5. 驱动动画的 JavaScript -->
+    <script>
+        // 1. 鼠标跟随光晕
+        const glow = document.getElementById('cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+        });
 
+        // 2. 滚动渐入显现 (Intersection Observer)
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // 出现一次后取消监听
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(reveal => revealObserver.observe(reveal));
+
+        // 3. 卡片 3D 倾斜效果
+        const cards = document.querySelectorAll('.tilt');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; 
+                const y = e.clientY - rect.top;
+                
+                // 计算旋转角度
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10; // 最大倾斜 10 度
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                // 鼠标移出时恢复原状
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                card.style.transition = 'transform 0.5s ease'; // 恢复时加一点回弹
+            });
+
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none'; // 鼠标进入时移除 transition，防止 3D 跟随延迟
+            });
+        });
+    </script>
 </body>
 </html>
