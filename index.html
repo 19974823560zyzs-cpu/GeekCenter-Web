@@ -17,14 +17,14 @@
             overflow-x: hidden;
         }
 
-        /* 鼠标跟随的暗紫光晕背景 */
+        /* 鼠标跟随的暗紫光晕背景 (修复了拦截点击的问题) */
         #cursor-glow {
             position: fixed;
             width: 600px;
             height: 600px;
             background: radial-gradient(circle, rgba(137,180,250,0.15) 0%, rgba(15,23,42,0) 70%);
             border-radius: 50%;
-            pointer-events: none;
+            pointer-events: none; /* 核心：让鼠标穿透，不拦截点击 */
             transform: translate(-50%, -50%);
             z-index: 0;
             transition: opacity 0.3s;
@@ -98,13 +98,13 @@
         .shizuku-highlight p { color: #e2e8f0; font-size: 1rem; margin: 0; }
         .shizuku-highlight strong { color: #fff; background: rgba(56, 189, 248, 0.3); padding: 2px 6px; border-radius: 4px; }
 
-        /* 🚀 4. 下载按钮区 */
+        /* 🚀 4. 下载按钮区 (修复了层级和点击问题) */
         .download-section {
             margin-top: 60px;
             padding-top: 30px;
             border-top: 1px solid #334155;
             position: relative;
-            z-index: 1;
+            z-index: 100; /* 核心：提高层级，防遮挡 */
         }
         
         /* 统一按钮的基础尺寸 */
@@ -119,8 +119,10 @@
             font-size: 1.05rem;
             transition: all 0.3s ease;
             cursor: pointer;
-            min-width: 200px; /* 保证三个按钮宽度一致 */
+            min-width: 200px;
             box-sizing: border-box;
+            position: relative;
+            z-index: 101; /* 核心：按钮层级最高 */
         }
         
         /* 主按钮：官方直连（蓝色发光） */
@@ -155,9 +157,8 @@
             border: 2px solid #475569;
             box-shadow: 0 0 0 0 rgba(148, 163, 184, 0.4);
             animation: pulse-gray 2s infinite;
-            cursor: not-allowed; /* 提示不可点击 */
+            cursor: not-allowed;
         }
-        /* 让 iOS 按钮悬浮时不产生上浮效果，但保持发光 */
         .btn-ios:hover {
             transform: none;
         }
@@ -179,13 +180,16 @@
 </head>
 <body>
 
+    <!-- 鼠标跟随光晕层 -->
     <div id="cursor-glow"></div>
 
+    <!-- 顶部标题区 -->
     <div class="reveal">
         <h1>GeekCenter</h1>
         <p class="subtitle">鏱粤出品，必属精品。<br>专为极客打造的现代化系统级工具箱。</p>
     </div>
 
+    <!-- 功能简介区 -->
     <div class="geek-features">
         <div class="reveal">
             <h2 class="section-title">什么是 GeekCenter？</h2>
@@ -217,6 +221,7 @@
             </div>
         </div>
 
+        <!-- Shizuku 专属模块 -->
         <div class="shizuku-highlight reveal">
             <h3>🔓 零门槛提权：内置 Shizuku 一键安装</h3>
             <p>告别繁琐的电脑 ADB 激活！GeekCenter 内置了 Shizuku 核心引擎，无需跳转，<strong>App 内即可一键提取、安装并引导激活</strong>，瞬间解锁全部极客底层能力。</p>
@@ -228,7 +233,7 @@
         <p style="color: #94a3b8; margin-bottom: 20px; font-size: 1rem;">选择下载节点：</p>
         
         <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-            <!-- 🐙 主按钮（蓝色呼吸灯）：官方直连 -->
+            <!-- 🐙 主按钮（呼吸灯）：官方直连 -->
             <a href="https://github.com/19974823560zyzs-cpu/GeekCenter-Web/releases/latest/download/app-release.apk" class="btn btn-primary">
                 🐙 GitHub 官方极速下载
             </a>
@@ -250,12 +255,14 @@
     </div>
 
     <script>
+        // 1. 鼠标跟随光晕
         const glow = document.getElementById('cursor-glow');
         document.addEventListener('mousemove', (e) => {
             glow.style.left = e.clientX + 'px';
             glow.style.top = e.clientY + 'px';
         });
 
+        // 2. 滚动渐入显现 (Intersection Observer)
         const reveals = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -267,6 +274,7 @@
         }, { threshold: 0.15 });
         reveals.forEach(reveal => revealObserver.observe(reveal));
 
+        // 3. 卡片 3D 倾斜效果
         const cards = document.querySelectorAll('.tilt');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -279,10 +287,12 @@
                 const rotateY = ((x - centerX) / centerX) * 10;
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
             });
+            
             card.addEventListener('mouseleave', () => {
                 card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
                 card.style.transition = 'transform 0.5s ease';
             });
+
             card.addEventListener('mouseenter', () => {
                 card.style.transition = 'none';
             });
