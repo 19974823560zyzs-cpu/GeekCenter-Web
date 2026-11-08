@@ -90,7 +90,7 @@
         .shizuku-highlight p { color: #e2e8f0; font-size: 1rem; margin: 0; }
         .shizuku-highlight strong { color: #fff; background: rgba(56, 189, 248, 0.3); padding: 2px 6px; border-radius: 4px; }
 
-        /* 🚀 新增：更新日志板块样式 */
+        /* 🚀 更新日志板块样式 */
         .update-log {
             background: #1e293b;
             border: 1px solid #334155;
@@ -127,7 +127,7 @@
             color: #fff;
         }
 
-        /* 🚀 4. 下载按钮区 (纵向排列，整齐划一) */
+        /* 🚀 下载按钮区 */
         .download-section {
             margin-top: 50px;
             padding-top: 30px;
@@ -137,7 +137,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px; /* 统一按钮间距 */
+            gap: 15px;
         }
         
         .btn {
@@ -159,7 +159,6 @@
             white-space: nowrap;
         }
         
-        /* 蓝奏云按钮（青色发光） - 推荐主按钮 */
         .btn-cloud {
             background-color: #2dd4bf;
             color: #0f172a;
@@ -173,7 +172,6 @@
             box-shadow: 0 10px 25px rgba(45, 212, 191, 0.6);
         }
 
-        /* 主按钮：官方直连（蓝色发光） */
         .btn-primary {
             background-color: #89b4fa;
             color: #0f172a;
@@ -187,7 +185,6 @@
             box-shadow: 0 10px 25px rgba(137,180,250,0.6);
         }
 
-        /* iOS 待开发按钮（高级灰） */
         .btn-ios {
             background-color: #1e293b;
             color: #94a3b8;
@@ -261,16 +258,15 @@
         </div>
     </div>
 
-    <!-- 🚀 新增：更新日志区域 -->
+    <!-- 🚀 更新日志区域 -->
     <div class="update-log reveal">
-        <h3>🎉 v1.2026.11.06.13 更新内容</h3>
+        <h3>🎉 v1.2026.11.09.14 更新内容</h3>
         <ul>
-            <li><strong>全机型深度适配：</strong> 底层重构，完美兼容 Android 11+ 及各大魔改系统（MIUI/HyperOS、ColorOS、鸿蒙等）。</li>
-            <li><strong>温控矩阵重构：</strong> 引入 30+ 品牌特征字典，彻底修复部分机型温度读取异常（如显示 5℃）的问题。</li>
-            <li><strong>悬浮窗硬核升级：</strong> 新增底层 Choreographer 硬件级动态刷新率（Hz）实时显示，滑动帧率精准跳动。</li>
-            <li><strong>进程列表修复：</strong> 重构解析引擎，解决部分系统进程页“无数据”的 Bug，支持多级命令降级解析。</li>
-            <li><strong>网络稳定性优化：</strong> 加入 60 秒超时机制，完美应对 Render 后端冷启动休眠唤醒。</li>
-            <li><strong>UI 焕新：</strong> 赛博朋克暗紫沉浸主题全局覆盖，修复启动页蓝色闪烁问题。</li>
+            <li><strong>极致前台保活机制：</strong> 开启极致性能后，哪怕划掉后台，通知栏绝不掉线，服务稳如泰山，防系统杀后台。</li>
+            <li><strong>安全逐步解冻引擎：</strong> 关闭极致模式时，采用【分批挂起恢复】逻辑，每次解冻 5 个应用，完美突破荣耀/鸿蒙等系统拦截，防止全量命令失效。</li>
+            <li><strong>新增自定义保护名单：</strong> 开启前新增应用勾选列表，除微信/QQ外，你可以自由选择不想被误杀的 App。</li>
+            <li><strong>Shizuku 绝对保护伞：</strong> 底层写死 Shizuku 包名，彻底杜绝“把救命通道冻结”的致命 Bug。</li>
+            <li><strong>启动静默兜底：</strong> 只要点开一次极客中心，后台静默自动排查并恢复所有被挂起的应用，彻底告别变砖。</li>
         </ul>
     </div>
 
@@ -278,23 +274,21 @@
     <div class="download-section reveal">
         <p style="color: #94a3b8; margin-bottom: 10px; font-size: 1rem;">选择下载节点：</p>
         
-        <!-- 按钮 1：蓝奏云 (已更新为最新的链接和密码) -->
-        <a href="https://wwaxv.lanzouc.com/i3nwN4exagjc" target="_blank" class="btn btn-cloud">
-            ☁️ 蓝奏云极速下载 (密码: c1dt)
+        <!-- 蓝奏云链接已更新 -->
+        <a href="https://wwaxv.lanzouc.com/igJb84f8pk6j" target="_blank" class="btn btn-cloud">
+            ☁️ 蓝奏云极速下载 (密码: 1hb1)
         </a>
 
-        <!-- 按钮 2：GitHub 官方 -->
         <a href="https://github.com/19974823560zyzs-cpu/GeekCenter-Web/releases/latest/download/app-release.apk" class="btn btn-primary">
             🐙 GitHub 官方直连
         </a>
 
-        <!-- 按钮 3：iOS 待开发 -->
         <a href="javascript:void(0)" onclick="alert('iOS 版本正在开发中，敬请期待！')" class="btn btn-ios">
             🍎 iOS 版本 (待开发)
         </a>
         
         <p style="color: #64748b; font-size: 0.85rem; margin-top: 20px;">
-            当前版本：v1.2026.11.06.13
+            当前版本：v1.2026.11.09.14
         </p>
     </div>
 
